@@ -1,15 +1,21 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAllPosts, getPostBySlug } from "@/lib/api";
+import { getAllPosts, getPostByURI } from "@/lib/api";
 import markdownToHtml from "@/lib/markdownToHtml";
 import Container from "@/app/_components/container";
 import Header from "@/app/_components/header";
 import { PostBody } from "@/app/_components/post-body";
 import { PostHeader } from "@/app/_components/post-header";
 
-export default async function Post(props: Params) {
-  const params = await props.params;
-  const post = getPostBySlug(params.slug);
+export default async function Page({
+  params,
+}: {
+  params?: {
+    category: string;
+    post: string;
+  };
+}) {
+  const post = getPostByURI(`${params?.category}/${params?.post}`);
 
   if (!post) {
     return notFound();
@@ -27,6 +33,7 @@ export default async function Post(props: Params) {
             coverImage={post.coverImage}
             date={post.date}
             author={post.author}
+            URI={post.URI}
           />
           <PostBody content={content} />
         </article>
@@ -35,15 +42,15 @@ export default async function Post(props: Params) {
   );
 }
 
-type Params = {
-  params: Promise<{
-    slug: string;
-  }>;
-};
-
-export async function generateMetadata(props: Params): Promise<Metadata> {
-  const params = await props.params;
-  const post = getPostBySlug(params.slug);
+export async function generateMetadata({
+  params,
+}: {
+  params?: {
+    category: string;
+    post: string;
+  };
+}): Promise<Metadata> {
+  const post = getPostByURI(`${params?.category}/${params?.post}`);
 
   if (!post) {
     return notFound();
@@ -60,10 +67,10 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
   };
 }
 
-export async function generateStaticParams() {
-  const posts = getAllPosts();
+// export async function generateStaticParams() {
+//   const posts = getAllPosts();
 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
+//   return posts.map((post) => ({
+//     slug: post.slug,
+//   }));
+// }

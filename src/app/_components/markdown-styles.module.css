@@ -1,4 +1,4 @@
-.markdown {
+.module.css .markdown {
   @apply text-lg leading-relaxed;
 }
 
@@ -15,4 +15,20 @@
 
 .markdown h3 {
   @apply text-2xl mt-8 mb-4 leading-snug;
+}
+
+.markdown ul {
+  @apply list-disc list-outside pl-8;
+}
+
+.markdown ul ul {
+  @apply list-[circle] mt-2 mb-2;
+}
+
+.markdown li {
+  @apply mb-1;
+}
+
+.markdown li > ul {
+  @apply ml-4;
 }

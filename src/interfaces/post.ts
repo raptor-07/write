@@ -1,7 +1,7 @@
 import { type Author } from "./author";
 
 export type Post = {
-  slug: string;
+  URI: string;
   title: string;
   date: string;
   coverImage: string;
@@ -12,4 +12,10 @@ export type Post = {
   };
   content: string;
   preview?: boolean;
+};
+
+export type PostByCategory = {
+  tech: Post[];
+  business: Post[];
+  philosophy: Post[];
 };

@@ -5,16 +5,18 @@ import Image from "next/image";
 type Props = {
   title: string;
   src: string;
-  slug?: string;
+  URI: string;
 };
 
-const CoverImage = ({ title, src, slug }: Props) => {
+const CoverImage = ({ title, src, URI }: Props) => {
+  const [category, postName] = URI?.split("/");
+
   const image = (
     <Image
       src={src}
       alt={`Cover Image for ${title}`}
       className={cn("shadow-sm w-full", {
-        "hover:shadow-lg transition-shadow duration-200": slug,
+        "hover:shadow-lg transition-shadow duration-200": URI,
       })}
       width={1300}
       height={630}
@@ -22,8 +24,11 @@ const CoverImage = ({ title, src, slug }: Props) => {
   );
   return (
     <div className="sm:mx-0">
-      {slug ? (
-        <Link href={`/posts/${slug}`} aria-label={title}>
+      {URI ? (
+        <Link
+          href={`/${category}/posts/${postName}`}
+          className="hover:underline"
+        >
           {image}
         </Link>
       ) : (
