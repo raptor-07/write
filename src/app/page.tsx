@@ -1,30 +1,57 @@
-import Container from "@/app/_components/container";
-import { HeroPost } from "@/app/_components/hero-post";
-import { Intro } from "@/app/_components/intro";
-import { MoreStories } from "@/app/_components/more-stories";
-import { getAllPosts } from "@/lib/api";
+import { getRandomBg } from "@/lib/api";
+import { redirect } from "next/navigation";
+import Container from "./_components/container";
+import Link from "next/link";
 
-export default function Index() {
-  const allPosts = getAllPosts();
-
-  const heroPost = allPosts[0];
-
-  const morePosts = allPosts.slice(1);
+export default function Home() {
+  const bgImage = getRandomBg();
 
   return (
-    <main>
+    <div
+      className="relative min-h-screen w-full"
+      style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Black overlay */}
+      <div className="absolute inset-0 bg-black/70" />
+
+      {/* Content */}
       <Container>
-        <Intro />
-        <HeroPost
-          title={heroPost.title}
-          coverImage={heroPost.coverImage}
-          date={heroPost.date}
-          author={heroPost.author}
-          slug={heroPost.slug}
-          excerpt={heroPost.excerpt}
-        />
-        {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+        <section className="relative min-h-screen flex flex-col justify-center items-center">
+          <h1 className="text-5xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8 mb-8">
+            Expositions
+          </h1>
+          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
+            <Link
+              href="/all"
+              className="text-xl md:text-2xl underline transition-all"
+            >
+              All
+            </Link>
+            <Link
+              href="/tech"
+              className="text-xl md:text-2xl underline transition-all"
+            >
+              Tech
+            </Link>
+            <Link
+              href="/business"
+              className="text-xl md:text-2xl underline transition-all"
+            >
+              Business
+            </Link>
+            <Link
+              href="/philosophy"
+              className="text-xl md:text-2xl underline transition-all"
+            >
+              Philosophy
+            </Link>
+          </div>
+        </section>
       </Container>
-    </main>
+    </div>
   );
 }
