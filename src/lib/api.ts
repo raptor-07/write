@@ -88,6 +88,38 @@ export function getAllPostsByCategory(): PostByCategory {
   return postsByCategory;
 }
 
+export function getPostStaticParams() {
+  const postFileNamesByCategory = getPostsFileNamesByCategory();
+
+  const postURIsByCategory = ((obj: Record<string, string[]>) => {
+    return Object.fromEntries(
+      Object.entries(obj).map(([key, files]) => [
+        key,
+        files.map((file: string) => file.replace(".md", "")),
+      ])
+    );
+  })(postFileNamesByCategory);
+
+  const staticParams = Object.entries(postURIsByCategory).flatMap(
+    ([category, posts]) =>
+      posts.map((post) => ({
+        category,
+        post,
+      }))
+  );
+
+  return staticParams;
+}
+
+export function getCategoryStaticParams() {
+  return [
+    { category: "all" },
+    { category: "tech" },
+    { category: "business" },
+    { category: "philosophy" },
+  ];
+}
+
 export function getRandomBg() {
   const bgDir = join(process.cwd(), "public/assets/bg");
   const bgFiles = fs.readdirSync(bgDir);
