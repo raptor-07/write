@@ -1,7 +1,8 @@
 import { getRandomBg } from "@/lib/api";
-import { redirect } from "next/navigation";
 import Container from "./_components/container";
 import Link from "next/link";
+
+export const dynamic = "force-dynamic";
 
 export default function Home() {
   const bgImage = getRandomBg();
