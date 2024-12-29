@@ -28,23 +28,21 @@ export function HeroPost({
       <div className="mb-8 md:mb-16">
         <CoverImage title={title} src={coverImage} URI={URI} />
       </div>
-      <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
-        <div>
-          <h3 className="mb-4 text-4xl lg:text-5xl leading-tight">
-            <Link
-              href={`${category}/posts/${postName}`}
-              className="hover:underline"
-            >
-              {title}
-            </Link>
-          </h3>
-          <div className="mb-4 md:mb-0 text-lg">
-            <DateFormatter dateString={date} />
-          </div>
-        </div>
-        <div>
-          <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-20 md:mb-28">
+        <h3 className="text-4xl lg:text-5xl leading-tight">
+          <Link
+            href={`${category}/posts/${postName}`}
+            className="hover:underline"
+          >
+            {title}
+          </Link>
+        </h3>
+        <p className="text-lg leading-relaxed">{excerpt}</p>
+        <div className="flex items-center justify-start">
           <Avatar name={author.name} />
+        </div>
+        <div className="flex items-center justify-end">
+          <DateFormatter dateString={date} />
         </div>
       </div>
     </section>

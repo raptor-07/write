@@ -28,25 +28,25 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
             <Link
               href="/all"
-              className="text-xl md:text-2xl underline transition-all"
+              className="text-xl text-center md:text-2xl underline transition-all"
             >
               All
             </Link>
             <Link
               href="/tech"
-              className="text-xl md:text-2xl underline transition-all"
+              className="text-xl text-center md:text-2xl underline transition-all"
             >
               Tech
             </Link>
             <Link
               href="/business"
-              className="text-xl md:text-2xl underline transition-all"
+              className="text-xl text-center md:text-2xl underline transition-all"
             >
               Business
             </Link>
             <Link
               href="/philosophy"
-              className="text-xl md:text-2xl underline transition-all"
+              className="text-xl text-center md:text-2xl underline transition-all"
             >
               Philosophy
             </Link>
